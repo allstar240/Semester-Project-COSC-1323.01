@@ -1,3 +1,4 @@
+import json
 users = {}
 status = ""
 
@@ -8,16 +9,16 @@ def displayMenu():
     elif status == "n":
         newUser()
     return status
-def save_to_file(createLogin,createPassw):
+def save_to_file(users):
     print ("\nSaving login information...")
     name = "login.txt"
-    file = open(name, "a")
-    file.write(createLogin)
-    file.write(createPassw)
-    file.close()
+    json.dump(users, open(name, "w"))
 def load_file():
     print ("\nLoading login information...\n")
     name = "login.txt"    
+    tempUsers = json.load(open(name, "r"))
+    return tempUsers
+
     file = open(name, "r")
     file.close()
     
@@ -25,7 +26,7 @@ def newUser():
     createLogin = verifyUsername()
     createPassw = verifyPass()
     users[createLogin] = createPassw # add login and password
-    save_to_file(createLogin,createPassw)
+    save_to_file(users)
     print("\nUser created!\n")     
     
 def verifyUsername():
@@ -90,7 +91,8 @@ def hasNumbers(checkString):
     return any(char.isdigit() for char in checkString)
 
 def oldUser():
-    load_file()
+    users = load_file()
+    print(users)
     login = input("Enter login name: ")
     passw = input("Enter password: ")    
     try:
@@ -99,7 +101,9 @@ def oldUser():
     except:
         print ("\nUser doesn't exist or wrong password!\n")
 
-while status != "q":            
-    status = displayMenu()
+def main():
+    status = "y"
+    while status != "q":            
+        status = displayMenu()
 
-
+main()
