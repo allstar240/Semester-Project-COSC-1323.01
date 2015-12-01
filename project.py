@@ -93,10 +93,12 @@ def oldUser():
     load_file()
     login = input("Enter login name: ")
     passw = input("Enter password: ")    
-    if users[login] == passw: 
-        print ("\nLogin successful!\n")
-    else:
+    try:
+        if users[login] == passw:
+            print ("\nLogin successful!\n")
+    except:
         print ("\nUser doesn't exist or wrong password!\n")
 
 while status != "q":            
     status = displayMenu()
+
