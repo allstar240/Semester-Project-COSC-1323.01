@@ -18,7 +18,7 @@ def save_to_file(createLogin,createPassw):
 def load_file():
     print ("\nLoading login information...\n")
     name = "login.txt"    
-    file = open(name, "w")
+    file = open(name, "r")
     file.close()
     
 def newUser():
