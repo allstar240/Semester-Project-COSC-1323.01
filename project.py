@@ -1,6 +1,8 @@
 import json
 users = {}
 status = ""
+f = open("login.txt", 'w')
+f.close()
 
 def displayMenu():
     status = input("Do you have an existing username and password? [y/n] Enter q to quit: ")  
