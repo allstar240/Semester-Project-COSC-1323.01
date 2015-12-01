@@ -35,7 +35,7 @@ def verifyUsername():
     while createLogin == '':
         while retryUsername == 'y':
             try:
-                tempLogin = input("Create login name.  It must be an .edu e-mail address contianing @ and .edu: ")
+                tempLogin = input("Create login name.  It must be an .edu e-mail address containing @ and .edu: ")
                 if tempLogin in users: # check if login name exists
                     print ("\nLogin name already exist!\n")
                     retryUsername = retryEntry()
