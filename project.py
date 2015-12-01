@@ -2,21 +2,21 @@ users = {}
 status = ""
 
 def displayMenu():
-    status = input("Do you have an existing username or password? [y/n] Enter q to quit: ")  
+    status = input("Do you have an existing username and password? [y/n] Enter q to quit: ")  
     if status == "y":
         oldUser()
     elif status == "n":
         newUser()
     return status
 def save_to_file(createLogin,createPassw):
-    print ("Saving login information...")
+    print ("\nSaving login information...")
     name = "login.txt"
     file = open(name, "a")
     file.write(createLogin)
     file.write(createPassw)
     file.close()
 def load_file():
-    print ("Loading login information...")
+    print ("\nLoading login information...\n")
     name = "login.txt"    
     file = open(name, "w")
     file.close()
@@ -101,4 +101,5 @@ def oldUser():
 
 while status != "q":            
     status = displayMenu()
+
 
