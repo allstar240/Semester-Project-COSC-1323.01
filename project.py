@@ -18,11 +18,11 @@ def save_to_file(users):
 def load_file():
     print ("\nLoading login information...\n")
     name = "login.txt"    
-    tempUsers = json.load(open(name, "r"))
-    return tempUsers
-
-    file = open(name, "r")
-    file.close()
+    try:
+        tempUsers = json.load(open(name, "r"))
+        return tempUsers
+    except:
+        print("There was an error reading the file.")
     
 def newUser():
     createLogin = verifyUsername()
@@ -94,7 +94,6 @@ def hasNumbers(checkString):
 
 def oldUser():
     users = load_file()
-    print(users)
     login = input("Enter login name: ")
     passw = input("Enter password: ")    
     try:
