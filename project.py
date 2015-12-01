@@ -2,17 +2,30 @@ users = {}
 status = ""
 
 def displayMenu():
-    status = input("Do you have an existing username or password? [y/n] Enter q to quit: ")  
+    status = input("Do you have an existing username and password? [y/n] Enter q to quit: ")  
     if status == "y":
         oldUser()
     elif status == "n":
         newUser()
     return status
-
+def save_to_file(createLogin,createPassw):
+    print ("\nSaving login information...")
+    name = "login.txt"
+    file = open(name, "a")
+    file.write(createLogin)
+    file.write(createPassw)
+    file.close()
+def load_file():
+    print ("\nLoading login information...\n")
+    name = "login.txt"    
+    file = open(name, "r")
+    file.close()
+    
 def newUser():
     createLogin = verifyUsername()
     createPassw = verifyPass()
     users[createLogin] = createPassw # add login and password
+    save_to_file(createLogin,createPassw)
     print("\nUser created!\n")     
     
 def verifyUsername():
@@ -22,7 +35,7 @@ def verifyUsername():
     while createLogin == '':
         while retryUsername == 'y':
             try:
-                tempLogin = input("Create login name.  It must be an .edu e-mail address: ")
+                tempLogin = input("Create login name.  It must be an .edu e-mail address containing @ and .edu: ")
                 if tempLogin in users: # check if login name exists
                     print ("\nLogin name already exist!\n")
                     retryUsername = retryEntry()
@@ -77,11 +90,13 @@ def hasNumbers(checkString):
     return any(char.isdigit() for char in checkString)
 
 def oldUser():
+    load_file()
     login = input("Enter login name: ")
-    passw = input("Enter password: ")
-    if users[login] == passw: 
-        print ("\nLogin successful!\n")
-    else:
+    passw = input("Enter password: ")    
+    try:
+        if users[login] == passw:
+            print ("\nLogin successful!\n")
+    except:
         print ("\nUser doesn't exist or wrong password!\n")
 
 while status != "q":            
