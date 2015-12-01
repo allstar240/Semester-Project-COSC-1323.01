@@ -8,11 +8,24 @@ def displayMenu():
     elif status == "n":
         newUser()
     return status
-
+def save_to_file(createLogin,createPassw):
+    print ("Saving login information...")
+    name = "login.txt"
+    file = open(name, "a")
+    file.write(createLogin)
+    file.write(createPassw)
+    file.close()
+def load_file():
+    print ("Loading login information...")
+    name = "login.txt"    
+    file = open(name, "w")
+    file.close()
+    
 def newUser():
     createLogin = verifyUsername()
     createPassw = verifyPass()
     users[createLogin] = createPassw # add login and password
+    save_to_file(createLogin,createPassw)
     print("\nUser created!\n")     
     
 def verifyUsername():
@@ -22,7 +35,7 @@ def verifyUsername():
     while createLogin == '':
         while retryUsername == 'y':
             try:
-                tempLogin = input("Create login name.  It must be an .edu e-mail address: ")
+                tempLogin = input("Create login name.  It must be an .edu e-mail address contianing @ and .edu: ")
                 if tempLogin in users: # check if login name exists
                     print ("\nLogin name already exist!\n")
                     retryUsername = retryEntry()
@@ -77,8 +90,9 @@ def hasNumbers(checkString):
     return any(char.isdigit() for char in checkString)
 
 def oldUser():
+    load_file()
     login = input("Enter login name: ")
-    passw = input("Enter password: ")
+    passw = input("Enter password: ")    
     if users[login] == passw: 
         print ("\nLogin successful!\n")
     else:
