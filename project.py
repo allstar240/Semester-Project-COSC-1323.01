@@ -48,6 +48,10 @@ def verifyUsername():
                 elif '.edu' not in tempLogin:
                     print("Invalid entry.  Please enter a valid .edu e-mail address.")
                     retryUsername = retryEntry()
+                    retryUsername = retryEntry()
+                elif len(tempLogin) <5: #length of @ and .edu is 5
+                    print("Invalid entry.  Please enter a valid .edu e-mail address.")
+                    retryUsername = retryEntry()
                 else:
                     createLogin = tempLogin
                     retryUsername = 'n'
